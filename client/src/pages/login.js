@@ -14,7 +14,7 @@ export default function Login() {
   const handleLogin = () => setAuthenticated(true);
   const handleLogout = () => setAuthenticated(false);
 
-  console.log(authenticated)
+  //console.log(authenticated)
 
   const [user, setUser] = useState({
     userEmail: "",
@@ -53,11 +53,13 @@ export default function Login() {
     if (response.status === 200) {
       console.log("Okay")
       handleLogin();
+      window.alert("Welcome Back!");
       navigate("/");
 
     } else {
       console.log("Not Find")
       handleLogout();
+      window.alert("Invalid login!");
 
     }
 

@@ -34,14 +34,16 @@ export default function Signup() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPerson),
+      
     })
       .catch(error => {
         window.alert(error);
         return;
       });
 
+      window.alert("Account Created Successfully");
     setUser({ userName: "", userEmail: "", userPassword: "" });
-    navigate("/");
+    navigate("/login");
   }
 
 
