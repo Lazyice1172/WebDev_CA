@@ -28,7 +28,7 @@ export default function Signup() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...user };
 
-    await fetch("http://localhost:5000/signup", {
+    await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
