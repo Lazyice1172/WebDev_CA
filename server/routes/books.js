@@ -12,15 +12,7 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-router.get('/books', function (req, res) {
-    let db_connect = dbo.getDb("library");
-    db_connect.collection("books")
-        .find({})
-        .toArray(function (err, result) {
-            if (err) throw err;
-            response.json(result);
-        })
-})
+
 
 
 module.exports = router;

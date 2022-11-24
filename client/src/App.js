@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import React, { useState, useContext } from "react";
 
 import Main from './pages/main';
-import Header from './pages/header';  // Not Using
+// import Header from './pages/header'; 
 import HeaderIn from './pages/headerIn';
 import HeaderOut from './pages/headerOut';
 import Footer from './pages/footer';

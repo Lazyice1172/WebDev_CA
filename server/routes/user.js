@@ -23,7 +23,7 @@ router.post('/signup', async function (req, response) {
         if (err) throw err;
         response.json(res)
         console.log("Saved");
-        
+
     })
 });
 
@@ -45,11 +45,25 @@ router.post('/login', function (req, res) {
             res.status(200);
         }
         res.json(result);
-        
+
     });
-    
+
 });
 
+router.get('/books', function (req, res) {
+    let db_connect = dbo.getDb("library");
+    db_connect
+        .collection("books")
+        .find({})
+        .toArray(function (err, result) {
+            if (err) {
+                result.status(400);
+                res.send();
+            }
+            console.log("Return all books");
+            res.send(result);
+        });
+});
 
 
 
