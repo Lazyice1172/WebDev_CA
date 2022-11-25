@@ -52,6 +52,9 @@ router.post('/login', function (req, res) {
 
 router.get('/books', function (req, res) {
     let db_connect = dbo.getDb("library");
+
+    // console.log(req.query.search)
+
     db_connect
         .collection("books")
         .find({})
@@ -63,6 +66,56 @@ router.get('/books', function (req, res) {
             console.log("Return all books");
             res.send(result);
         });
+});
+
+
+router.post('/books/search', function (req, res) {
+
+    let db_connect = dbo.getDb("library");
+
+    // console.log("Connect");
+    // console.log(req.body.bookTitle);
+
+    let myquery = {}
+
+    if (req.body.bookTitle) {
+        myquery = { title: req.body.bookTitle }
+    }
+
+    // console.log(myquery);
+
+    db_connect
+        .collection('books')
+        .find(myquery)
+        .toArray(function (err, result) {
+            if (err) {
+                result.status(400);
+                res.send();
+            } else {
+                // console.log(result);
+                res.send(result);
+            }
+        })
+
+
+})
+
+
+router.get('/bookDetail/:id', function (req, res) {
+    let db_connect = dbo.getDb("library");
+
+    let myquery = { _id: ObjectId(req.params.id) };
+
+    console.log("Connect");
+
+    db_connect
+        .collection("books")
+        .findOne(myquery, function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
+
+    console.log("Successfully");
 });
 
 

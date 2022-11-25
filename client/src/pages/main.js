@@ -1,7 +1,9 @@
 
 import '../App.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+
+
 
 
 const Books = (props) => (
@@ -20,30 +22,69 @@ const Books = (props) => (
             </div>
             {/* <!-- Product actions--> */}
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <Link to="bookDetail"><div class="text-center"><a class="btn btn-outline-dark mt-auto" >View options</a></div></Link>
+                <Link to={`/bookDetail/${props.book._id}`}><div class="text-center"><a class="btn btn-outline-dark mt-auto" >View options</a></div></Link>
             </div>
         </div>
     </div>
 );
 
+var Count = 0;
+
 export default function Main() {
+
+
 
     const [books, setBooks] = useState([]);
 
-    //This method fetch the bokks from the database
-    async function getBooks(event) {
+    const [searchBook, setsearchBook] = useState({
+        bookTitle: '',
+    })
 
-        try {
-            await fetch('http://localhost:8000/books')
-                .then(response => response.json())
-                .then(data => { setBooks(data) });
-        } catch (err) {
-            console.error(err);
-        }
+    function updateSearch(value) {
+        return setsearchBook((prev) => {
+            return { ...prev, ...value }
+        });
     }
 
-    //getBooks();
 
+
+    // This method fetch the bokks from the database
+    // async function getBooks(event) {
+    //     try {
+    //         await fetch('http://localhost:8000/books')
+    //             .then(response => response.json())
+    //             .then(data => { setBooks(data) });
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
+
+    // Only Call the Function One times
+    useEffect(() => {
+
+        if (Count === 0) {
+            console.log("in");
+
+            async function getBooks() {
+                const response = await fetch(`http://localhost:8000/books`);
+
+                if (!response.ok) {
+                    const message = `An error occurred: ${response.statusText}`;
+                    window.alert(message);
+                    return;
+                }
+
+                const result = await response.json();
+                setBooks(result);
+            }
+            getBooks();
+
+            Count = 1;
+        }
+
+        return;
+
+    }, [books.length]);
 
     function bookList() {
         return books.map((book) => {
@@ -55,7 +96,48 @@ export default function Main() {
         });
     }
 
+    async function getBookTitle() {
+        //console.log(setBooks);
+        setBooks([]);
 
+        const findBook = { ...searchBook };
+
+        const response = await fetch(`http://localhost:8000/books/search`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(findBook),
+
+        }).catch(err => {
+            window.alert(err);
+            return;
+        });
+
+        const result = await response.json();
+        console.log(result);
+        setBooks(result);
+
+        //console.log(response);
+
+    }
+
+    async function Reset() {
+        console.log('Reset')
+        async function getBooks() {
+            const response = await fetch(`http://localhost:8000/books`);
+
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+
+            const result = await response.json();
+            setBooks(result);
+        }
+        getBooks();
+    }
 
     return (
         <div>
@@ -67,7 +149,29 @@ export default function Main() {
                     </div>
                 </div>
             </header>
-            <button onClick={getBooks}>Get Books</button>
+            {/* <!-- Need to change the CSS --> */}
+
+            <div className="flex border-2 border-gray-200 rounded">
+                <input
+                    type="text"
+                    className="px-4 py-2 w-80"
+                    placeholder="Search Book Title"
+                    id='bookTitle'
+                    name="bookTitle"
+                    value={searchBook.bookTitle}
+                    onChange={(e) => updateSearch({ bookTitle: e.target.value })}
+                />
+
+                <button onClick={getBookTitle}>
+                    Search
+                </button>
+                <button onClick={Reset}>
+                    Reload
+                </button>
+
+            </div>
+
+
             {/* <!-- Section--> */}
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
@@ -80,7 +184,7 @@ export default function Main() {
                 </div>
             </section>
 
-        </div>
+        </div >
 
     );
 }
