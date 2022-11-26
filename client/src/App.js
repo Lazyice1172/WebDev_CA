@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import React, { useState, useContext } from "react";
 
-import Main from './pages/main';
+// import Main from './pages/main';
+import MainIn from './pages/mainIn'
+import MainOut from './pages/mainOut'
 // import Header from './pages/header'; 
 import HeaderIn from './pages/headerIn';
 import HeaderOut from './pages/headerOut';
@@ -28,7 +30,9 @@ function App() {
         <BrowserRouter>
           {authenticated ? <HeaderIn />: <HeaderOut />}
           <Routes>
-            <Route path="/" element={<Main />}></Route>
+            {/* <Route path="/" element={<Main />}></Route> */}
+            <Route path="/" element={authenticated ? <MainIn />: <MainOut />}></Route> 
+
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/bookDetail/:id" element={<Detail />}></Route>
