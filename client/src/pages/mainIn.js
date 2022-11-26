@@ -156,11 +156,11 @@ export default function Main() {
             {/* <!-- Button Search --> */}
 
             <Link to="/createbook">
-            <button onClick={getBookTitle} className="mt-3  btn btn-outline-success border border-success rounded search_button w-25">
+            <button onClick={getBookTitle} className="mt-5  btn btn-outline-success border border-success rounded search_button w-25">
                     Add your book!
                 </button>
                 </Link>
-            <div className="flex border-2 border-gray-200 rounded m-4">
+            <div className="flex mb-1 border-2 border-gray-200 rounded m-4">
                 <input
                     type="text"
                     className="px-4 py-2 w-80 mx-2"
@@ -182,7 +182,7 @@ export default function Main() {
 
 
             {/* <!-- Section--> */}
-            <section class="py-5">
+            <section class="py-1">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 

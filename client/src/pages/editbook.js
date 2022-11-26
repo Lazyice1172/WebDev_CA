@@ -46,6 +46,7 @@ export default function EditBook() {
 
     }, [params.id, navigate]);
 
+   
 
 
     return (
@@ -62,7 +63,7 @@ export default function EditBook() {
             type="text"
             name="title"
             placeholder="Title"
-            value={books.title}
+            // value={books.title}
             id="bookTitle"
             // onChange={(e) => updateBook({ bookTitle: e.target.value })}
           />
@@ -70,7 +71,7 @@ export default function EditBook() {
             type="text"
             name="author"
             placeholder="Author"
-            value={books.author}
+            // value={books.author}
             id="bookAuthor"
             // onChange={(e) => updateBook({ bookAuthor: e.target.value })}
           />

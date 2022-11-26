@@ -6,7 +6,7 @@ import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 function Footer(props) {
     return (
         <>
-            <footer class="container-fluid sticky-bottom  bg-light mt-auto py-3">
+            <footer class="container-fluid sticky-bottom mt-4 bg-light mt-auto py-3">
                 <div class="container"><p class="m-0 text-center text-black">Copyright &copy; Web Assignment</p></div>
             </footer>
             {/* // <!-- Bootstrap core JS--> */}
