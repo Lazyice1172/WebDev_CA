@@ -10,7 +10,7 @@ const Books = (props) => (
     <div class="col mb-5">
         <div class="card h-100">
             {/* <!-- Product image--> */}
-            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+            <img class="card-img-top" src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg" alt="..." />
             {/* <!-- Product details--> */}
             <div class="card-body p-4">
                 <div class="text-center">
@@ -151,10 +151,10 @@ export default function Main() {
             </header>
             {/* <!-- Need to change the CSS --> */}
 
-            <div className="flex border-2 border-gray-200 rounded">
+            <div className="flex border-2 border-gray-200 rounded m-4">
                 <input
                     type="text"
-                    className="px-4 py-2 w-80"
+                    className="px-4 py-2 w-80 mx-2"
                     placeholder="Search Book Title"
                     id='bookTitle'
                     name="bookTitle"
@@ -162,10 +162,10 @@ export default function Main() {
                     onChange={(e) => updateSearch({ bookTitle: e.target.value })}
                 />
 
-                <button onClick={getBookTitle}>
+                <button onClick={getBookTitle} className="mx-1 border border-success rounded search_button">
                     Search
                 </button>
-                <button onClick={Reset}>
+                <button onClick={Reset} class=" border border-success rounded search_button">
                     Reload
                 </button>
 
