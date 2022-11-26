@@ -155,6 +155,11 @@ export default function Main() {
 
             {/* <!-- Button Search --> */}
 
+            <Link to="/createbook">
+            <button onClick={getBookTitle} className="mt-3  btn btn-outline-success border border-success rounded search_button w-25">
+                    Add your book!
+                </button>
+                </Link>
             <div className="flex border-2 border-gray-200 rounded m-4">
                 <input
                     type="text"
@@ -166,7 +171,7 @@ export default function Main() {
                     onChange={(e) => updateSearch({ bookTitle: e.target.value })}
                 />
 
-                <button onClick={getBookTitle} className="mx-1 border border-success rounded search_button">
+                <button onClick={getBookTitle} className="mx-1 bg-success text-white border border-success rounded search_button">
                     Search
                 </button>
                 <button onClick={Reset} class=" border border-success rounded search_button">
