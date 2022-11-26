@@ -30,21 +30,23 @@ export default function Detail() {
                 navigate("/");
                 return;
             }
-
             setBooks(result);
-
-
         }
-
         console.log("Books Details")
-
         getBookDetails();
-
         return;
 
     }, [params.id, navigate]);
 
-
+    async function deleteBook() {
+        const responseDelete = await fetch(`http://localhost:8000/book/delete/${params.id.toString()}`, {
+            method: 'DELETE'
+        })
+        // console.log("Deleted Book");
+        console.log(responseDelete);
+        window.alert("Book Deleted !!!")
+        navigate("/");
+    }
 
     return (
         <>
@@ -69,13 +71,13 @@ export default function Detail() {
                         </div> */}
                         </div>
                         <div class="col-md-2 edit-wrapper">
-                            <Link to="editbook"><button className="mx-1 mb-1 w-100 btn btn-outline-dark w-1 border-1  rounded align-text-bottom">
-                            edit
-                        </button>
-                        </Link>
-                        <button className="mx-1 w-100 bg-dark text-light btn w-1 border-1  rounded align-text-bottom">
-                            delete
-                        </button>
+                            <Link to={`/editbook/${params.id.toString()}`}><button className="mx-1 mb-1 w-100 btn btn-outline-dark w-1 border-1  rounded align-text-bottom">
+                                edit
+                            </button>
+                            </Link>
+                            <button className="mx-1 w-100 bg-dark text-light btn w-1 border-1  rounded align-text-bottom" onClick={deleteBook}>
+                                delete
+                            </button>
                         </div>
 
                     </div>

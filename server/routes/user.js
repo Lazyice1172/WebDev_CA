@@ -1,5 +1,5 @@
 var express = require('express');
-const { response, request } = require("express");
+const { response, request, Router } = require("express");
 var User = require('../model/user')
 var mongoose = require('mongoose');
 
@@ -106,7 +106,7 @@ router.get('/bookDetail/:id', function (req, res) {
 
     let myquery = { _id: ObjectId(req.params.id) };
 
-    console.log("Connect");
+    //console.log("Connect");
 
     db_connect
         .collection("books")
@@ -115,9 +115,74 @@ router.get('/bookDetail/:id', function (req, res) {
             res.json(result);
         });
 
-    console.log("Successfully");
+    //console.log("Successfully");
 });
 
+router.post('/book/add', function (req, res) {
+    let db_connect = dbo.getDb("library");
 
+    let newBook = {
+        title: req.body.title,
+        author: req.body.author,
+    };
+
+    console.log(req.body.title);
+
+    db_connect.collection("books").insertOne(newBook, function (err, book) {
+        if (err) throw err;
+        res.json(book);
+        console.log("Book Saved");
+    });
+    //console.log("Connect");
+});
+
+router.delete("/book/delete/:id", function (req, res) {
+    let db_connect = dbo.getDb("library");
+
+    let myquery = { _id: ObjectId(req.params.id) };
+
+    //console.log("connect");
+    //console.log(myquery);
+
+    db_connect.collection("books").deleteOne(myquery, function (err, result) {
+        if (err) {
+            console.log("Error");
+            res.send(404);
+        } else {
+            console.log("Book deleted successfully")
+            res.send(200)
+        }
+    });
+});
+
+router.post('/book/update/:id', function (req, res) {
+    let db_connect = dbo.getDb("library");
+
+    let myquery = { _id: ObjectId(req.params.id) };
+
+    let newvalues = {
+        $set: {
+            title: req.body.title,
+            author: req.body.author,
+        },
+    };
+
+    //console.log("connect");
+    //console.log(myquery);
+    //console.log(newvalues);
+
+    db_connect.collection("books").updateOne(myquery, newvalues, function (err, result) {
+        if (err) {
+            res.send(404);
+        } else {
+            console.log("Book Updated Successfully");
+            res.json(result);
+        }
+    })
+
+
+
+    //res.sendStatus(200);
+});
 
 module.exports = router;

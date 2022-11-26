@@ -35,7 +35,6 @@ export default function Main() {
 
 
     const [books, setBooks] = useState([]);
-
     const [searchBook, setsearchBook] = useState({
         bookTitle: '',
     })
@@ -150,16 +149,16 @@ export default function Main() {
                 </div>
             </header>
 
-            
+
 
 
             {/* <!-- Button Search --> */}
 
             <Link to="/createbook">
-            <button onClick={getBookTitle} className="mt-5  btn btn-outline-success border border-success rounded search_button w-25">
+                <button onClick={getBookTitle} className="mt-5  btn btn-outline-success border border-success rounded search_button w-25">
                     Add your book!
                 </button>
-                </Link>
+            </Link>
             <div className="flex mb-1 border-2 border-gray-200 rounded m-4">
                 <input
                     type="text"

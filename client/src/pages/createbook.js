@@ -9,11 +9,6 @@ import authContext from '../authContext';
 
 export default function CreateBook() {
 
-
-  const { authenticated, setAuthenticated } = useContext(authContext);
-  const handleLogin = () => setAuthenticated(true);
-  const handleLogout = () => setAuthenticated(false);
-
   //console.log(authenticated)
 
   const [book, setBook] = useState({
@@ -36,8 +31,7 @@ export default function CreateBook() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newBook = { ...book };
 
-    //console.log("1")
-    const response = await fetch("http://localhost:8000/createbook", {
+    const response = await fetch("http://localhost:8000/book/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,13 +46,11 @@ export default function CreateBook() {
     console.log(response);
     if (response.status === 200) {
       console.log("Okay")
-      handleLogin();
       window.alert("Successfully!");
       navigate("/");
 
     } else {
-      console.log("Not Find")
-      handleLogout();
+      //console.log("Not Find")
       window.alert("Fail to add!");
 
     }
@@ -79,17 +71,17 @@ export default function CreateBook() {
             type="text"
             name="title"
             placeholder="Title"
-            // value={book.title}
+            value={book.title}
             id="bookTitle"
-            onChange={(e) => updateBook({ bookTitle: e.target.value })}
+            onChange={(e) => updateBook({ title: e.target.value })}
           />
           <input className="border-1"
             type="text"
             name="author"
             placeholder="Author"
-            // value={book.author}
+            value={book.author}
             id="bookAuthor"
-            onChange={(e) => updateBook({ bookAuthor: e.target.value })}
+            onChange={(e) => updateBook({ author: e.target.value })}
           />
           
           <input className="bg-success border-1" type="submit" value="Create" />
