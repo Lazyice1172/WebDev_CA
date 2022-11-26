@@ -5,12 +5,7 @@
     
 }
 
-.html .body {
-  height: 100%;
-}
-#root {
-  height:100%
-}
+
 
 .header-wrapper {
   display: inline;
@@ -69,6 +64,10 @@
   height: 45px;
   width: 80px;
   font-size: 15px;
+}
+
+.edit-wrapper {
+  height: 300px
 }
 
 

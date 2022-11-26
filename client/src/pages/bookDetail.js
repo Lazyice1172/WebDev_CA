@@ -51,8 +51,8 @@ export default function Detail() {
             <section class="py-5">
                 <div class="container px-4 px-lg-5 my-5">
                     <div class="row gx-4 gx-lg-5 align-items-center">
-                        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
-                        <div class="col-md-6">
+                        <div class="col-md-5"><img class="card-img-top mb-5 mb-md-0" src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg" alt="..." /></div>
+                        <div class="col-md-5">
                             <div class="small mb-1">BOOK</div>
                             <h1 class="display-5 fw-bolder">{books.title}</h1>
                             <div class="fs-5 mb-5">
@@ -68,6 +68,16 @@ export default function Detail() {
                             </button>
                         </div> */}
                         </div>
+                        <div class="col-md-2 edit-wrapper">
+                            <Link to="editbook"><button className="mx-1 mb-1 w-100 btn btn-outline-dark w-1 border-1  rounded align-text-bottom">
+                            edit
+                        </button>
+                        </Link>
+                        <button className="mx-1 w-100 bg-dark text-light btn w-1 border-1  rounded align-text-bottom">
+                            delete
+                        </button>
+                        </div>
+
                     </div>
                 </div>
             </section>

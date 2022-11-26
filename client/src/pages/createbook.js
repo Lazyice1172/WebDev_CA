@@ -67,29 +67,19 @@ export default function CreateBook() {
 
   }
 
-
   return (
     <React.Fragment>
       <div className="mx-auto login-wrapper">
         <h2 className="text-success">Create Book</h2>
 
-        {/*
-      <form onSubmit={onSubmit}> 
-      <form method="post" action="server_url" id="login-form">
-              <button onClick={handleLogin}>Login</button>
-        <button onClick={handleLogout}>Logout</button>
-      */}
 
         <form action="server_url" id="login-form" onSubmit={onSubmit}>
-          {/* 
-        <input type="text" name="userName" placeholder="Email" />
-        <input type="password" name="userPassword" placeholder="Password" />
-        */}
+
           <input className="border-1"
             type="text"
             name="title"
             placeholder="Title"
-            value={book.title}
+            // value={book.title}
             id="bookTitle"
             onChange={(e) => updateBook({ bookTitle: e.target.value })}
           />
@@ -97,7 +87,7 @@ export default function CreateBook() {
             type="text"
             name="author"
             placeholder="Author"
-            value={book.author}
+            // value={book.author}
             id="bookAuthor"
             onChange={(e) => updateBook({ bookAuthor: e.target.value })}
           />
