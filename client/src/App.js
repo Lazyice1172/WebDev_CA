@@ -13,6 +13,7 @@ import Footer from './pages/footer';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import Detail from './pages/bookDetail';
+import CreateBook from './pages/createbook';
 
 import NotFound from './pages/NotFound';
 
@@ -35,6 +36,7 @@ function App() {
 
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/createbook" element={<CreateBook />}></Route>
             <Route path="/bookDetail/:id" element={<Detail />}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
