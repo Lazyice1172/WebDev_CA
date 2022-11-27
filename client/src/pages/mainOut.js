@@ -133,6 +133,7 @@ export default function Main() {
                 return;
             }
 
+            setsearchBook({ bookTitle: '' })
             const result = await response.json();
             setBooks(result);
         }
@@ -161,29 +162,21 @@ export default function Main() {
                     value={searchBook.bookTitle}
                     onChange={(e) => updateSearch({ bookTitle: e.target.value })}
                 />
-
                 <button onClick={getBookTitle} className="mx-1 border border-success rounded search_button">
                     Search
                 </button>
                 <button onClick={Reset} class=" border border-success rounded search_button">
                     Reload
                 </button>
-
             </div>
-
-
             {/* <!-- Section--> */}
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-
                         <tbody>{bookList()}</tbody>
-
                     </div>
                 </div>
             </section>
-
         </div >
 
     );

@@ -11,22 +11,43 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
-router.post('/signup', async function (req, response) {
+// This is Create A new User
+router.post('/signup', async function (req, res) {
     let db_connect = dbo.getDb("library");
+
+    let newEmail = {
+        userEmail: req.body.userEmail,
+    }
 
     let newUser = new User({
         userName: req.body.userName,
         userEmail: req.body.userEmail,
         userPassword: req.body.userPassword
     });
-    db_connect.collection("users").insertOne(newUser, function (err, res) {
-        if (err) throw err;
-        response.json(res)
-        console.log("Saved");
 
-    })
+    // Check if email already exists
+    db_connect.collection('users').find(newEmail).toArray(function (err, result) {
+        if (err) throw err;
+        if (result.length === 0) {
+            console.log("Email Not Found");
+            // Create new user
+            db_connect.collection("users").insertOne(newUser, function (err, result) {
+                if (err) throw err;
+                console.log("Saved");
+            })
+            res.status(200);
+        } else {
+            console.log("Email Already Exists");
+            res.status(409);
+        }
+        //console.log(res);
+        res.json(result);
+
+    });
+
 });
 
+// Check the User exists or not
 router.post('/login', function (req, res) {
     let db_connect = dbo.getDb("library");
 
@@ -50,6 +71,7 @@ router.post('/login', function (req, res) {
 
 });
 
+// Get all the Books
 router.get('/books', function (req, res) {
     let db_connect = dbo.getDb("library");
 
@@ -68,7 +90,7 @@ router.get('/books', function (req, res) {
         });
 });
 
-
+// Search Books
 router.post('/books/search', function (req, res) {
 
     let db_connect = dbo.getDb("library");
@@ -100,7 +122,7 @@ router.post('/books/search', function (req, res) {
 
 })
 
-
+// Get the Book Details in Detail Page
 router.get('/bookDetail/:id', function (req, res) {
     let db_connect = dbo.getDb("library");
 
@@ -118,6 +140,7 @@ router.get('/bookDetail/:id', function (req, res) {
     //console.log("Successfully");
 });
 
+// Add a new book
 router.post('/book/add', function (req, res) {
     let db_connect = dbo.getDb("library");
 
@@ -136,6 +159,7 @@ router.post('/book/add', function (req, res) {
     //console.log("Connect");
 });
 
+// Deleted The Book
 router.delete("/book/delete/:id", function (req, res) {
     let db_connect = dbo.getDb("library");
 
@@ -155,6 +179,7 @@ router.delete("/book/delete/:id", function (req, res) {
     });
 });
 
+// Edit the Book
 router.post('/book/update/:id', function (req, res) {
     let db_connect = dbo.getDb("library");
 

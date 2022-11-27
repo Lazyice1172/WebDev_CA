@@ -28,22 +28,33 @@ export default function Signup() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...user };
 
-    await fetch("http://localhost:8000/signup", {
+    const response = await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPerson),
-      
     })
       .catch(error => {
         window.alert(error);
         return;
       });
 
+      console.log(response);
+
+    if (response.status === 200) {
       window.alert("Account Created Successfully");
-    setUser({ userName: "", userEmail: "", userPassword: "" });
-    navigate("/login");
+      setUser({ userName: "", userEmail: "", userPassword: "" });
+      navigate("/login");
+    } else if (response.status === 409) {
+      window.alert("Email Already In-Use");
+      setUser({ userName: "", userEmail: "", userPassword: "" });
+    } else {
+      window.alert("Error");
+      setUser({ userName: "", userEmail: "", userPassword: "" });
+    }
+
+
   }
 
 

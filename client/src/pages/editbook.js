@@ -17,6 +17,7 @@ export default function EditBook() {
     });
   }
 
+  // Call the function to put the Book information into Text Box before edit 
   useEffect(() => {
 
     async function getBookDetails() {
@@ -43,6 +44,7 @@ export default function EditBook() {
 
   }, [params.id, navigate]);
 
+  //Function to get the Data from input and fetch the data to Backend
   async function editBook(e){
     e.preventDefault();
 

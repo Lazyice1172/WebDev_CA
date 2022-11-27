@@ -10,6 +10,9 @@ export default function Detail() {
     const params = useParams();
     const navigate = useNavigate();
 
+    // This section will call the function one time
+    // This section fetch to backend
+    // This is going to get the Book information using _id
     useEffect(() => {
 
         async function getBookDetails() {
@@ -30,6 +33,7 @@ export default function Detail() {
                 navigate("/");
                 return;
             }
+            // Save the Book Information
             setBooks(result);
         }
         console.log("Books Details")
@@ -38,6 +42,7 @@ export default function Detail() {
 
     }, [params.id, navigate]);
 
+    // Fcuntion to remove the book
     async function deleteBook() {
         const responseDelete = await fetch(`http://localhost:8000/book/delete/${params.id.toString()}`, {
             method: 'DELETE'
@@ -70,6 +75,7 @@ export default function Detail() {
                             </button>
                         </div> */}
                         </div>
+                        {/* Goint to Edit Page */}
                         <div class="col-md-2 edit-wrapper">
                             <Link to={`/editbook/${params.id.toString()}`}><button className="mx-1 mb-1 w-100 btn btn-outline-dark w-1 border-1  rounded align-text-bottom">
                                 edit

@@ -29,10 +29,11 @@ function App() {
     <authContext.Provider value={{ authenticated, setAuthenticated }}>
       <div className="App">
         <BrowserRouter>
-          {authenticated ? <HeaderIn />: <HeaderOut />}
+          {/* Switch Log In or Out Page */}
+          {authenticated ? <HeaderIn /> : <HeaderOut />}
           <Routes>
-            {/* <Route path="/" element={<Main />}></Route> */}
-            <Route path="/" element={authenticated ? <MainIn />: <MainOut />}></Route> 
+            {/* Switch Log In or Out Page */}
+            <Route path="/" element={authenticated ? <MainIn /> : <MainOut />}></Route>
 
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
